@@ -821,7 +821,11 @@ public:
 /** Lexicographic comparison of <code>const_symbol</code>s, based on their names */
 struct ConstSymbolLT {
 
-    bool operator()(const VAL::const_symbol* const a, const VAL::const_symbol* const b) {
+    bool operator()(const VAL::const_symbol* const a, const VAL::const_symbol* const b)
+#ifdef __APPLE__
+        const
+#endif
+    {
         return (a->getName() < b->getName());
     }
 };

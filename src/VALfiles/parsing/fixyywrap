@@ -3,7 +3,15 @@
 $bindir = shift @ARGV;
 $srcdir = shift @ARGV;
 
-system("sed -i 's/yyerror(char/yyerror(const char/' $bindir/pddl+.cpp");
+# In-place substitution using Perl (avoids BSD sed vs GNU sed incompatibility)
+{
+	local $^I = '';
+	local @ARGV = ("$bindir/pddl+.cpp");
+	while (<>) {
+		s/yyerror\(char/yyerror(const char/g;
+		print;
+	}
+}
 
 open IN, "g++ -E $srcdir/fixyywrap.cpp |";
 open OUT, "> $bindir/fixyywrap.h";
@@ -11,7 +19,9 @@ open OUT, "> $bindir/fixyywrap.h";
 while (<IN>) {
 
 	if (m/int yywrap/) {
+		print OUT "#ifndef __APPLE__\n";
 		print OUT "int yyFlexLexer::yywrap() { return 1; };\n";
+		print OUT "#endif\n";
 	}
 
 }

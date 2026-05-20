@@ -1,0 +1,30 @@
+#!/bin/bash
+
+FLEX_PREFIX=$(brew --prefix flex)
+CLP_PREFIX=$(brew --prefix clp)
+CBC_PREFIX=$(brew --prefix cbc)
+CGL_PREFIX=$(brew --prefix cgl)
+COINUTILS_PREFIX=$(brew --prefix coinutils)
+OSI_PREFIX=$(brew --prefix osi)
+
+mkdir -p release
+cd release
+cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DCLP_INCLUDES="$CLP_PREFIX/include/clp" \
+      -DCLP_LIBRARIES="$CLP_PREFIX/lib/libClp.dylib" \
+      -DCBC_INCLUDES="$CBC_PREFIX/include/cbc" \
+      -DCBC_LIBRARY="$CBC_PREFIX/lib/libCbc.dylib" \
+      -DCBC_SOLVER_LIBRARY="$CBC_PREFIX/lib/libCbcSolver.dylib" \
+      -DCGL_INCLUDES="$CGL_PREFIX/include/cgl" \
+      -DCGL_LIBRARIES="$CGL_PREFIX/lib/libCgl.dylib" \
+      -DCOINUTILS_INCLUDES="$COINUTILS_PREFIX/include/coinutils" \
+      -DCOINUTILS_LIBRARIES="$COINUTILS_PREFIX/lib/libCoinUtils.dylib" \
+      -DOSI_INCLUDES="$OSI_PREFIX/include/osi" \
+      -DOSI_LIBRARIES="$OSI_PREFIX/lib/libOsi.dylib" \
+      -DOSICLP_LIBRARIES="$CLP_PREFIX/lib/libOsiClp.dylib" \
+      -DFLEX_INCLUDE_DIR="$FLEX_PREFIX/include" \
+      -DFL_LIBRARY= \
+      -DCMAKE_DISABLE_FIND_PACKAGE_Doxygen=TRUE \
+      -DCMAKE_DISABLE_FIND_PACKAGE_GSL=TRUE \
+      ../src

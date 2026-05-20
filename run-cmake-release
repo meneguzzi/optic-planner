@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd release
-cmake -DCMAKE_BUILD_TYPE=Release ../src
+cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_BUILD_TYPE=Release ../src

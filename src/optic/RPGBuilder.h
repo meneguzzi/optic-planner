@@ -46,7 +46,12 @@ using std::map;
 #include "ptree.h"
 
 #include <assert.h>
+#ifdef __APPLE__
+#include <float.h>
+#include <limits.h>
+#else
 #include <values.h>
+#endif
 #include <math.h>
 #include <string.h>
 

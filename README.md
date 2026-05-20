@@ -35,6 +35,17 @@ sudo apt install cmake coinor-libcbc-dev coinor-libclp-dev \
                      coinor-libcoinutils-dev libbz2-dev bison flex
 ```
 
+### macOS Prerequisites (Homebrew)
+
+On macOS, install the required libraries via [Homebrew](https://brew.sh):
+
+```bash
+brew install cmake bison flex clp cbc cgl coinutils osi
+```
+
+Note that Homebrew's `bison` and `flex` are installed keg-only and will be
+picked up automatically by the macOS-specific build scripts described below.
+
 ### Alternative: Conan Build Prerequisites
 
 Make sure to be able to build CMake / C++ projects. On Ubuntu:
@@ -75,6 +86,15 @@ Run one of:
   and producing a statically linked binary.    It assumes you are using the
   32-bit version of CPLEX, on Linux - if this is not the case, edit the
   script.
+
+#### macOS (Homebrew)
+
+On macOS, use the Homebrew-specific scripts instead, which locate libraries in
+their Homebrew-installed paths automatically:
+
+`run-cmake-debug-macos`, to build with CLP and debugging enabled.
+
+`run-cmake-release-macos`, to build with CLP, optimised, without debugging.
 
 Note that if you want to make static binaries with CLP, you must have static
 versions of the CLP libraries installed.  This may mean downloading and

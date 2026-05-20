@@ -36,7 +36,12 @@
 #include <cassert>
 #include <cstring>
 
+#ifdef __APPLE__
+#include <float.h>
+#include <limits.h>
+#else
 #include <values.h>
+#endif
 
 using std::set;
 using std::map;
